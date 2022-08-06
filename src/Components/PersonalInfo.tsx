@@ -19,8 +19,10 @@ const PersonalInfo = () => {
   const [email, setEmail] = useState(PersonalInfo.email);
   const [tel, setTel] = useState(PersonalInfo.phone);
   const [telerror, setTelErrror] = useState("");
+  const [loading, setLoading] = useState(false);
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     const config: AxiosRequestConfig = {
       headers: {
         apikey: "hMQreFTgUZJq3bkJ4KzhCDufDIqLQY2J",
@@ -33,8 +35,10 @@ const PersonalInfo = () => {
     if (data.valid) {
       dispatch(setPersonalInfo({ fullname: name, email: email, phone: tel }));
       dispatch(setStep(Step + 1));
+      setLoading(false);
     } else {
       setTelErrror("Invalid Format");
+      setLoading(false);
     }
   };
   const { classes } = useStyles();
@@ -78,9 +82,14 @@ const PersonalInfo = () => {
         description="Enter phone number in international format"
         required
         value={tel}
-        onChange={(e) => setTel(e.target.value)}
+        onChange={(e) => {
+          setTel(e.target.value);
+          setTelErrror("");
+        }}
       />
       <Button
+        loading={loading}
+        loaderPosition="left"
         className={classes.gridBtn}
         rightIcon={<IconArrowRight />}
         type="submit">

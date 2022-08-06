@@ -28,8 +28,6 @@ const Duration = (props: Props) => {
       return new Date(d);
     }
   };
-  console.log(days);
-
   const [date, setDate] = useState<DateRangePickerValue>([
     validateDate(days[0]),
     validateDate(days[1]),
