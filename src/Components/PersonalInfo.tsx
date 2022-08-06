@@ -23,23 +23,19 @@ const PersonalInfo = () => {
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const config: AxiosRequestConfig = {
-      headers: {
-        apikey: "hMQreFTgUZJq3bkJ4KzhCDufDIqLQY2J",
-      },
-    };
-    const { data } = await axios.get(
-      `https://api.apilayer.com/number_verification/validate?number=${tel}`,
-      config
-    );
-    if (data.valid) {
-      dispatch(setPersonalInfo({ fullname: name, email: email, phone: tel }));
-      dispatch(setStep(Step + 1));
-      setLoading(false);
-    } else {
-      setTelErrror("Invalid Format");
-      setLoading(false);
-    }
+    // const config: AxiosRequestConfig = {
+    //   headers: {
+    //     apikey: "hMQreFTgUZJq3bkJ4KzhCDufDIqLQY2J",
+    //   },
+    // };
+    // const { data } = await axios.get(
+    //   `https://api.apilayer.com/number_verification/validate?number=${tel}`,
+    //   config
+    // );
+
+    dispatch(setPersonalInfo({ fullname: name, email: email, phone: tel }));
+    dispatch(setStep(Step + 1));
+    setLoading(false);
   };
   const { classes } = useStyles();
 
